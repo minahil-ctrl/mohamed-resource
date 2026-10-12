@@ -1,8 +1,9 @@
-import { ALL_EXAMS, ALL_MCQS, ALL_TOPICS } from "./data";
+import { ALL_EXAMS, ALL_MCQS } from "./data";
+import { CHAPTERS, notesHref, practiceHref } from "./content";
 import { unitById } from "./units";
 import type { UnitId } from "./types";
 
-export type HitKind = "Topic" | "Term" | "Formula" | "Application" | "Red flag" | "Quiz" | "Exam Q";
+export type HitKind = "Topic" | "Term" | "Formula" | "Question" | "Quiz" | "Exam Q";
 
 export interface Hit {
   kind: HitKind;
@@ -16,84 +17,54 @@ export interface Hit {
 
 function build(): Hit[] {
   const hits: Hit[] = [];
-  for (const t of ALL_TOPICS) {
-    const u = unitById(t.unit);
-    const base = `/module-1/${u.slug}`;
+  for (const c of CHAPTERS) {
     hits.push({
       kind: "Topic",
-      title: `${t.code} ${t.title}`,
-      snippet: t.blurb,
-      unit: t.unit,
-      href: `${base}#${t.id}`,
-      haystack: `${t.title} ${t.blurb} ${t.points.join(" ")}`.toLowerCase(),
+      title: `${c.code} ${c.title}`,
+      snippet: c.objectives[0] ?? "",
+      unit: c.unit,
+      href: notesHref(c),
+      haystack: `${c.title} ${c.objectives.join(" ")} ${c.why}`.toLowerCase(),
       weight: 3,
     });
-    for (const k of t.terms) {
-      hits.push({
-        kind: "Term",
-        title: k.term,
-        snippet: k.def,
-        unit: t.unit,
-        href: `${base}#${t.id}`,
-        haystack: `${k.term} ${k.def}`.toLowerCase(),
-        weight: 4,
-      });
+    for (const t of c.terms) {
+      hits.push({ kind: "Term", title: t.term, snippet: t.def, unit: c.unit, href: notesHref(c), haystack: `${t.term} ${t.def}`.toLowerCase(), weight: 4 });
     }
-    for (const f of t.formulas ?? []) {
-      hits.push({
-        kind: "Formula",
-        title: f.name,
-        snippet: f.expr,
-        unit: t.unit,
-        href: `${base}#${t.id}`,
-        haystack: `${f.name} ${f.expr} ${f.note ?? ""}`.toLowerCase(),
-        weight: 4,
-      });
+    for (const f of c.formulas) {
+      hits.push({ kind: "Formula", title: f.split("=")[0].trim(), snippet: f, unit: c.unit, href: notesHref(c), haystack: f.toLowerCase(), weight: 4 });
     }
-    for (const a of t.applications) {
+    for (const q of c.questions) {
       hits.push({
-        kind: "Application",
-        title: a.title,
-        snippet: a.scenario,
-        unit: t.unit,
-        href: `${base}#${t.id}`,
-        haystack: `${a.title} ${a.concept} ${a.scenario}`.toLowerCase(),
-        weight: 2,
-      });
-    }
-    for (const r of t.redFlags) {
-      hits.push({
-        kind: "Red flag",
-        title: r.length > 70 ? `${r.slice(0, 68)}…` : r,
-        snippet: r,
-        unit: t.unit,
-        href: `${base}#${t.id}`,
-        haystack: r.toLowerCase(),
+        kind: "Question",
+        title: `${q.marks} marks · ${q.text}`,
+        snippet: `${c.code} ${c.title}`,
+        unit: c.unit,
+        href: practiceHref(c, "questions"),
+        haystack: q.text.toLowerCase(),
         weight: 1,
       });
     }
   }
   ALL_MCQS.forEach((q) => {
-    const u = unitById(q.unit);
-    const idx = Number(q.id.split("-q")[1]) - 1;
+    const c = CHAPTERS.find((x) => x.id === q.topic);
     hits.push({
       kind: "Quiz",
       title: q.q,
       snippet: `Correct: ${q.options[q.answer]}`,
       unit: q.unit,
-      href: `/module-2/${u.slug}?tab=quiz&q=${idx}`,
+      href: c ? practiceHref(c) : `/module-2/${unitById(q.unit).slug}`,
       haystack: `${q.q} ${q.options.join(" ")}`.toLowerCase(),
       weight: 1,
     });
   });
   ALL_EXAMS.forEach((q) => {
-    const u = unitById(q.unit);
+    const c = CHAPTERS.find((x) => x.id === q.topic);
     hits.push({
       kind: "Exam Q",
       title: `${q.marks} marks · ${q.question}`,
       snippet: q.stimulus ?? q.indicative[0],
       unit: q.unit,
-      href: `/module-2/${u.slug}?tab=bank&open=${q.id}`,
+      href: c ? `${practiceHref(c, "questions")}${"&open=" + q.id}` : `/module-2/${unitById(q.unit).slug}?tab=bank&open=${q.id}`,
       haystack: `${q.question} ${q.stimulus ?? ""} ${q.indicative.join(" ")}`.toLowerCase(),
       weight: 1,
     });
@@ -120,7 +91,6 @@ export function search(query: string, limit = 14): Hit[] {
     scored.push({ h, s });
   }
   scored.sort((a, b) => b.s - a.s);
-  // keep a mix of kinds: at most 4 of the lowest-weight kinds
   const out: Hit[] = [];
   const perKind: Record<string, number> = {};
   for (const { h } of scored) {

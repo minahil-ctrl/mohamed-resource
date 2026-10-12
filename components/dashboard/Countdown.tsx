@@ -36,7 +36,7 @@ export default function Countdown() {
         <div>
           <p className="eyebrow">{STUDENT_NAME}&apos;s Edexcel IGCSE Business sprint</p>
           <h1 className="h-display mt-2 text-5xl text-white sm:text-7xl" suppressHydrationWarning>
-            Exam in <span className="text-lime">{now === null ? "--" : d}</span> day{d === 1 ? "" : "s"}
+            Exam in <span className="text-lime-ink">{now === null ? "--" : d}</span> day{d === 1 ? "" : "s"}
           </h1>
           <p className="mt-3 inline-block rounded-lg bg-accent px-3.5 py-1.5 text-sm font-bold text-shell" suppressHydrationWarning>
             {phase}
@@ -53,11 +53,11 @@ export default function Countdown() {
               [s, "Sec"],
             ] as const
           ).map(([v, l]) => (
-            <div key={l} className="min-w-[68px] rounded-2xl border border-white/15 bg-shell/70 px-2 py-4 text-center sm:min-w-[84px] sm:py-5">
+            <div key={l} className="min-w-[68px] rounded-2xl border border-white/15 bg-canvas/70 px-2 py-4 text-center sm:min-w-[84px] sm:py-5">
               <p className="num text-3xl font-extrabold text-white sm:text-4xl" suppressHydrationWarning>
                 {now === null ? "--" : pad(v)}
               </p>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-lime">{l}</p>
+              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-lime-ink">{l}</p>
             </div>
           ))}
         </div>

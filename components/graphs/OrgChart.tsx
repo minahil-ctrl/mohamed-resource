@@ -133,13 +133,13 @@ export default function OrgChart() {
             ))}
           </div>
           <div className="rounded-xl border border-emerald-400/25 bg-emerald-400/[0.06] p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">Advantages</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Advantages</p>
             <ul className="mt-1 list-disc space-y-0.5 pl-4 text-sm text-slate-200">
               {pros.map((p) => <li key={p}>{p}</li>)}
             </ul>
           </div>
           <div className="rounded-xl border border-rose-400/25 bg-rose-400/[0.06] p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-rose-300">Disadvantages</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-rose-700 dark:text-rose-300">Disadvantages</p>
             <ul className="mt-1 list-disc space-y-0.5 pl-4 text-sm text-slate-200">
               {cons.map((p) => <li key={p}>{p}</li>)}
             </ul>

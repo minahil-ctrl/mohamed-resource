@@ -3,8 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, RotateCcw, Shuffle, Target, X } from "lucide-react";
 import type { MCQ } from "@/lib/types";
-import { ALL_TOPICS, topicTitle } from "@/lib/data";
-import { unitById } from "@/lib/units";
+import { topicTitle } from "@/lib/data";
+import { chapterById, notesHref } from "@/lib/content";
+import Marker from "@/components/ui/Marker";
+import { usePathname } from "next/navigation";
 import { LS, type QuizBest, useLocalStorage } from "@/lib/useLocalStorage";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -19,9 +21,8 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 function topicLink(topicId: string) {
-  const t = ALL_TOPICS.find((x) => x.id === topicId);
-  if (!t) return "/module-1";
-  return `/module-1/${unitById(t.unit).slug}#${topicId}`;
+  const c = chapterById(topicId);
+  return c ? notesHref(c) : "/module-1";
 }
 
 export default function Quiz({
@@ -39,6 +40,7 @@ export default function Quiz({
   const [picked, setPicked] = useState<number | null>(null);
   const [chosen, setChosen] = useState<Record<string, number>>({});
   const [done, setDone] = useState(false);
+  const pathname = usePathname();
 
   // reset when the question set changes (e.g. mixed quiz generated)
   useEffect(() => {
@@ -173,8 +175,8 @@ export default function Quiz({
               {missed.map((m) => (
                 <li key={m.id} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm">
                   <p className="font-medium text-white">{m.q}</p>
-                  <p className="mt-2 text-rose-300">Your answer: {m.options[chosen[m.id]]}</p>
-                  <p className="mt-0.5 text-emerald-300">Correct: {m.options[m.answer]}</p>
+                  <p className="mt-2 text-rose-700 dark:text-rose-300">Your answer: {m.options[chosen[m.id]]}</p>
+                  <p className="mt-0.5 text-emerald-700 dark:text-emerald-300">Correct: {m.options[m.answer]}</p>
                   <p className="mt-1 text-slate-300">{m.why[m.answer]}</p>
                 </li>
               ))}
@@ -216,7 +218,10 @@ export default function Quiz({
       </div>
 
       <div key={q.id} className="card animate-rise p-5 sm:p-8">
-        <span className="chip mb-4">{topicTitle(q.topic)}</span>
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <span className="chip">{topicTitle(q.topic)}</span>
+          <Marker id={q.id} label={q.q} href={`${pathname}?view=quiz&q=${questions.findIndex((x) => x.id === q.id)}`} />
+        </div>
         <h3 className="h-display text-2xl font-semibold leading-snug text-white sm:text-[28px]">{q.q}</h3>
 
         <ul className="mt-6 space-y-3">
@@ -252,7 +257,7 @@ export default function Quiz({
                   {picked !== null && (
                     <span
                       className={`mt-2 block pl-10 text-[13px] leading-relaxed ${
-                        isAns ? "text-emerald-200" : isPick ? "text-rose-200" : "text-slate-400"
+                        isAns ? "text-emerald-700 dark:text-emerald-300" : isPick ? "text-rose-700 dark:text-rose-300" : "text-slate-400"
                       }`}
                     >
                       {q.why[i]}
@@ -267,7 +272,7 @@ export default function Quiz({
         {picked !== null && (
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 animate-rise">
             <div className="flex items-center gap-3">
-              <span className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${isRight ? "bg-emerald-400/15 text-emerald-300" : "bg-rose-400/15 text-rose-300"}`}>
+              <span className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${isRight ? "bg-emerald-400/15 text-emerald-700 dark:text-emerald-300" : "bg-rose-400/15 text-rose-700 dark:text-rose-300"}`}>
                 {isRight ? "Correct" : "Not quite"}
               </span>
               <Link href={topicLink(q.topic)} className="inline-flex items-center gap-1 text-xs text-slate-400 hover:text-soft">

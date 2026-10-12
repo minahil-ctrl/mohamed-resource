@@ -1,26 +1,30 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, ClipboardCheck, LayoutDashboard, Printer } from "lucide-react";
+import { BookOpen, ClipboardCheck, LayoutDashboard, Printer, Star } from "lucide-react";
 import SearchBox from "./SearchBox";
+import ThemeToggle from "./ThemeToggle";
+import { useMarks } from "@/lib/marks";
 import { SITE_NAME, SITE_SUB } from "@/lib/config";
 
 const LINKS = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard, match: (p: string) => p === "/" },
-  { href: "/module-1", label: "Module 1", sub: "Visual Cheat Sheets", icon: BookOpen, match: (p: string) => p.startsWith("/module-1") || p.startsWith("/booklet") },
-  { href: "/module-2", label: "Module 2", sub: "Practice & Exam Bank", icon: ClipboardCheck, match: (p: string) => p.startsWith("/module-2") },
+  { href: "/module-1", label: "Module 1", sub: "Notes", icon: BookOpen, match: (p: string) => p.startsWith("/module-1") || p.startsWith("/booklet") },
+  { href: "/module-2", label: "Module 2", sub: "Practice & Exams", icon: ClipboardCheck, match: (p: string) => p.startsWith("/module-2") },
 ];
 
 export default function Navbar() {
   const pathname = usePathname() ?? "/";
+  const marks = useMarks();
+  const total = marks.items.length;
   return (
-    <header className="no-print sticky top-0 z-50 border-b border-white/10 bg-shell/90 backdrop-blur-xl">
+    <header className="no-print sticky top-0 z-50 border-b border-white/10 bg-canvas/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
         <Link href="/" className="group flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-lg font-extrabold text-shell transition group-hover:scale-105">B</span>
           <span className="leading-tight">
             <span className="block text-[15px] font-bold tracking-tight text-white">{SITE_NAME}</span>
-            <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-lime">{SITE_SUB}</span>
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-lime-ink">{SITE_SUB}</span>
           </span>
         </Link>
 
@@ -47,6 +51,16 @@ export default function Navbar() {
 
         <div className="ml-auto flex items-center gap-2">
           <SearchBox />
+          <Link
+            href="/review"
+            className={`btn relative !px-3 ${pathname.startsWith("/review") ? "!border-accent !bg-accent/20" : ""}`}
+            title="Starred items and questions for my tutor"
+            aria-label={`Review: ${total} saved items`}
+          >
+            <Star className="h-4 w-4" />
+            {total > 0 && <span className="num absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-[#00804C] px-1 text-[11px] font-bold text-[#F6F7ED]">{total}</span>}
+          </Link>
+          <ThemeToggle />
           <Link href="/booklet" className="btn hidden !px-3 sm:inline-flex" title="Print-ready booklet" aria-label="Print-ready booklet">
             <Printer className="h-4 w-4" />
           </Link>

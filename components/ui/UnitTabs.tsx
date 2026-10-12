@@ -18,7 +18,7 @@ export default function UnitTabs({ base, active, query }: { base: "/module-1" | 
                     : "border-white/15 bg-white/[0.04] text-white/85 hover:border-accent hover:text-white"
                 }`}
               >
-                <span className={`num text-xs font-bold ${isActive ? "text-shell/70" : "text-lime"}`}>U{u.number}</span>
+                <span className={`num text-xs font-bold ${isActive ? "text-shell/70" : "text-lime-ink"}`}>U{u.number}</span>
                 <span className="whitespace-nowrap">{u.short}</span>
               </Link>
             </li>

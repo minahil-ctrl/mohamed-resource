@@ -36,7 +36,7 @@ export default function PracticeClient({ unit }: { unit: UnitId }) {
                 active ? "border-accent bg-accent text-shell" : "border-white/15 bg-white/[0.04] hover:border-accent"
               }`}
             >
-              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${active ? "bg-shell/15 text-shell" : "bg-white/10 text-accent"}`}>
+              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${active ? "bg-canvas/15 text-shell" : "bg-white/10 text-accent-ink"}`}>
                 <Icon className="h-5 w-5" />
               </span>
               <span>

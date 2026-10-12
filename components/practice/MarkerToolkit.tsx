@@ -5,10 +5,10 @@ import { AO_ALLOCATION, AO_INFO, COMMAND_WORDS, MARKS_META } from "@/lib/data/ma
 import type { ExamMarks } from "@/lib/types";
 
 export const AO_TONE: Record<string, string> = {
-  ao1: "border-sky-400/40 bg-sky-400/10 text-sky-200",
-  ao2: "border-emerald-400/40 bg-emerald-400/10 text-emerald-200",
-  ao3: "border-amber-400/40 bg-amber-400/10 text-amber-200",
-  ao4: "border-fuchsia-400/40 bg-fuchsia-400/10 text-fuchsia-200",
+  ao1: "border-sky-400/40 bg-sky-400/10 text-sky-700 dark:text-sky-300",
+  ao2: "border-emerald-400/40 bg-emerald-400/10 text-emerald-700 dark:text-emerald-300",
+  ao3: "border-amber-400/40 bg-amber-400/10 text-amber-700 dark:text-amber-300",
+  ao4: "border-fuchsia-400/40 bg-fuchsia-400/10 text-fuchsia-700 dark:text-fuchsia-300",
 };
 
 export default function MarkerToolkit() {

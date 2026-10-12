@@ -9,12 +9,12 @@ type SearchFn = (q: string, limit?: number) => Hit[];
 
 const KIND_STYLE: Record<string, string> = {
   Topic: "bg-white/10 text-white",
-  Term: "bg-sky-400/15 text-sky-200",
-  Formula: "bg-amber-400/15 text-amber-200",
-  Application: "bg-emerald-400/15 text-emerald-200",
-  "Red flag": "bg-rose-500/15 text-rose-200",
-  Quiz: "bg-violet-400/15 text-violet-200",
-  "Exam Q": "bg-fuchsia-400/15 text-fuchsia-200",
+  Term: "bg-sky-400/15 text-sky-700 dark:text-sky-300",
+  Formula: "bg-amber-400/15 text-amber-700 dark:text-amber-300",
+  Application: "bg-emerald-400/15 text-emerald-700 dark:text-emerald-300",
+  "Red flag": "bg-rose-500/15 text-rose-700 dark:text-rose-300",
+  Quiz: "bg-violet-400/15 text-violet-700 dark:text-violet-300",
+  "Exam Q": "bg-fuchsia-400/15 text-fuchsia-700 dark:text-fuchsia-300",
 };
 
 export default function SearchBox() {

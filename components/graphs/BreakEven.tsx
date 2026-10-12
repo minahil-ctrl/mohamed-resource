@@ -128,14 +128,14 @@ export default function BreakEven() {
             </text>
             {bep && mos !== null && mos > 0 && (
               <g>
-                <line x1={sx(bep)} x2={sx(fcast)} y1={H - B - 14} y2={H - B - 14} className="stroke-[#DBE64C]" strokeWidth={2} />
-                <line x1={sx(bep)} x2={sx(bep)} y1={H - B - 20} y2={H - B - 8} className="stroke-[#DBE64C]" strokeWidth={2} />
-                <line x1={sx(fcast)} x2={sx(fcast)} y1={H - B - 20} y2={H - B - 8} className="stroke-[#DBE64C]" strokeWidth={2} />
+                <line x1={sx(bep)} x2={sx(fcast)} y1={H - B - 14} y2={H - B - 14} className="stroke-lime-ink" strokeWidth={2} />
+                <line x1={sx(bep)} x2={sx(bep)} y1={H - B - 20} y2={H - B - 8} className="stroke-lime-ink" strokeWidth={2} />
+                <line x1={sx(fcast)} x2={sx(fcast)} y1={H - B - 20} y2={H - B - 8} className="stroke-lime-ink" strokeWidth={2} />
                 <text
                   x={(sx(bep) + sx(fcast)) / 2}
                   y={H - B - 24}
                   textAnchor="middle"
-                  className="fill-[#DBE64C] text-[11px] font-semibold"
+                  className="fill-lime-ink text-[11px] font-semibold"
                 >
                   Margin of safety {fmt(Math.round(mos))}
                 </text>
@@ -184,7 +184,7 @@ export default function BreakEven() {
         ].map((s) => (
           <div key={s.k} className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
             <p className="text-[11px] uppercase tracking-wider text-slate-400">{s.k}</p>
-            <p className={`num mt-1 text-lg font-semibold ${s.bad ? "text-rose-300" : "text-white"}`}>{s.v}</p>
+            <p className={`num mt-1 text-lg font-semibold ${s.bad ? "text-rose-700 dark:text-rose-300" : "text-white"}`}>{s.v}</p>
             <p className="mt-0.5 text-[11px] text-slate-500">{s.note}</p>
           </div>
         ))}
@@ -210,11 +210,11 @@ export default function BreakEven() {
                       <Minus className="h-3.5 w-3.5" /> none
                     </span>
                   ) : w.delta < 0 ? (
-                    <span className="num inline-flex items-center gap-1 text-emerald-300">
+                    <span className="num inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-300">
                       <ArrowDown className="h-3.5 w-3.5" /> {Math.abs(Math.round(w.delta)).toLocaleString()} (safer)
                     </span>
                   ) : (
-                    <span className="num inline-flex items-center gap-1 text-rose-300">
+                    <span className="num inline-flex items-center gap-1 text-rose-700 dark:text-rose-300">
                       <ArrowUp className="h-3.5 w-3.5" /> {Math.round(w.delta).toLocaleString()} (riskier)
                     </span>
                   )}

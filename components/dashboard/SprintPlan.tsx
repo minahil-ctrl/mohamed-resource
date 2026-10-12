@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, ExternalLink } from "lucide-react";
 import { SPRINT } from "@/lib/data/sprint";
-import { ALL_TOPICS } from "@/lib/data";
-import { unitById } from "@/lib/units";
+import { chapterById, notesHref } from "@/lib/content";
 import { LS, useLocalStorage } from "@/lib/useLocalStorage";
 
 const fmtDate = (d: Date) => d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
@@ -30,7 +29,7 @@ export default function SprintPlan() {
         <div className="w-full max-w-xs">
           <div className="mb-1 flex justify-between text-xs font-semibold">
             <span className="text-white/60">Progress</span>
-            <span className="num text-accent">
+            <span className="num text-accent-ink">
               {count}/{keys.length} · {pct}%
             </span>
           </div>
@@ -42,31 +41,31 @@ export default function SprintPlan() {
 
       <ol className="space-y-3">
         {SPRINT.map((day) => {
-          const items = day.topics.map((id) => ALL_TOPICS.find((t) => t.id === id)!);
-          const codes = items.length > 1 ? `${items[0].code} to ${items[items.length - 1].code}` : items[0].code;
+          const items = day.topics.map((id) => chapterById(id)!);
+          const codes = items.map((c) => c.code).join(", ");
           const dayKeys = [...day.topics.map((t) => `${day.day}-${t}`), ...(day.extras ?? []).map((_, i) => `${day.day}-x${i}`)];
           const complete = dayKeys.every((k) => done[k]);
           const isToday = today ? sameDay(today, day.date) : false;
           return (
             <li
               key={day.day}
-              className={`card grid gap-4 p-5 transition md:grid-cols-[210px_1fr] ${isToday ? "!border-lime" : complete ? "!border-accent/60" : ""}`}
+              className={`card grid gap-4 p-5 transition md:grid-cols-[210px_1fr] ${isToday ? "!border-lime-ink" : complete ? "!border-accent/60" : ""}`}
             >
               <div className="flex items-start gap-3.5">
                 <span
                   className={`num grid h-12 w-12 shrink-0 place-items-center rounded-xl text-lg font-extrabold ${
-                    complete ? "bg-[#00804C] text-white" : isToday ? "bg-lime text-shell" : "bg-white/10 text-white"
+                    complete ? "bg-[#00804C] text-[#F6F7ED]" : isToday ? "bg-lime text-shell" : "bg-white/10 text-white"
                   }`}
                 >
                   {complete ? <Check className="h-6 w-6" /> : day.day}
                 </span>
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-lime">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-lime-ink">
                     Day {day.day} {isToday && <span className="ml-1 rounded bg-lime px-1.5 py-0.5 text-shell">Today</span>}
                   </p>
                   <p className="num text-sm text-white/60">{fmtDate(day.date)}</p>
-                  <p className="num mt-1 inline-block rounded-md border border-white/15 px-2 py-0.5 text-[11px] font-bold text-white/80">
-                    Syllabus {codes}
+                  <p className="num mt-1 max-w-[200px] rounded-md border border-white/15 px-2 py-0.5 text-[11px] font-bold leading-snug text-white/80">
+                    Topics {codes}
                   </p>
                 </div>
               </div>
@@ -75,11 +74,10 @@ export default function SprintPlan() {
                 <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
                   {items.map((t) => {
                     const k = `${day.day}-${t.id}`;
-                    const u = unitById(t.unit);
-                    return (
+                                        return (
                       <li key={k} className="flex items-center gap-1">
                         <Check_ checked={!!done[k]} onToggle={() => toggle(k)} label={`${t.code} ${t.title}`} />
-                        <Link href={`/module-1/${u.slug}#${t.id}`} aria-label={`Open ${t.title}`} className="shrink-0 rounded-md p-1.5 text-white/40 transition hover:bg-white/10 hover:text-lime">
+                        <Link href={notesHref(t)} aria-label={`Open ${t.title}`} className="shrink-0 rounded-md p-1.5 text-white/40 transition hover:bg-white/10 hover:text-lime-ink">
                           <ExternalLink className="h-3.5 w-3.5" />
                         </Link>
                       </li>

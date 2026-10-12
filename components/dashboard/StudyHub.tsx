@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Clock, Coffee, Flag, Pause, Play, RotateCcw, Timer, TimerReset } from "lucide-react";
-import { ALL_TOPICS } from "@/lib/data";
+import { CHAPTERS, chapterById } from "@/lib/content";
 import { SPRINT } from "@/lib/data/sprint";
 import { LS, useLocalStorage } from "@/lib/useLocalStorage";
 
@@ -35,7 +35,7 @@ const mmss = (ms: number) => {
 };
 const topicName = (id: string) => {
   if (id === "general") return "General revision";
-  const t = ALL_TOPICS.find((x) => x.id === id);
+  const t = chapterById(id);
   return t ? `${t.code} ${t.title}` : id;
 };
 
@@ -153,7 +153,7 @@ export default function StudyHub() {
                 <p className="num text-5xl font-extrabold text-white" suppressHydrationWarning>
                   {display}
                 </p>
-                <p className="mt-1 flex items-center justify-center gap-1 text-[11px] font-bold uppercase tracking-[0.18em] text-lime">
+                <p className="mt-1 flex items-center justify-center gap-1 text-[11px] font-bold uppercase tracking-[0.18em] text-lime-ink">
                   {timer.phase === "break" ? <Coffee className="h-3 w-3" /> : <Timer className="h-3 w-3" />}
                   {timer.mode === "stopwatch" ? "elapsed" : timer.phase}
                 </p>
@@ -168,10 +168,10 @@ export default function StudyHub() {
                 value={timer.topicId}
                 disabled={timer.running}
                 onChange={(e) => update({ topicId: e.target.value })}
-                className="w-full rounded-xl border border-white/15 bg-shell px-3 py-2.5 text-sm text-white focus:border-accent focus:outline-none disabled:opacity-60"
+                className="w-full rounded-xl border border-white/15 bg-canvas px-3 py-2.5 text-sm text-white focus:border-accent focus:outline-none disabled:opacity-60"
               >
                 <option value="general">General revision</option>
-                {ALL_TOPICS.map((t) => (
+                {CHAPTERS.map((t) => (
                   <option key={t.id} value={t.id}>
                     {t.code} {t.title}
                   </option>
@@ -222,7 +222,7 @@ export default function StudyHub() {
             </div>
           </div>
         </div>
-        <p className="mt-4 min-h-5 text-sm font-semibold text-accent" aria-live="polite">
+        <p className="mt-4 min-h-5 text-sm font-semibold text-accent-ink" aria-live="polite">
           {flash}
         </p>
       </div>
@@ -236,7 +236,7 @@ export default function StudyHub() {
           </div>
           <div className="flex gap-5 text-right">
             <div>
-              <p className="num text-2xl font-extrabold text-lime">{byDate[today] ?? 0}</p>
+              <p className="num text-2xl font-extrabold text-lime-ink">{byDate[today] ?? 0}</p>
               <p className="text-[10px] font-bold uppercase tracking-wider text-white/50">min today</p>
             </div>
             <div>
@@ -263,7 +263,7 @@ export default function StudyHub() {
                   style={{ height: `${Math.max((d.mins / maxMins) * 100, d.mins ? 6 : 0)}%` }}
                 />
               </div>
-              <span className={`num text-[11px] font-bold ${d.key === today ? "text-lime" : "text-white/50"}`}>D{d.day}</span>
+              <span className={`num text-[11px] font-bold ${d.key === today ? "text-lime-ink" : "text-white/50"}`}>D{d.day}</span>
             </div>
           ))}
         </div>
@@ -278,7 +278,7 @@ export default function StudyHub() {
             {recent.map((e) => (
               <li key={e.ts} className="flex items-center justify-between gap-3 py-2 text-sm">
                 <span className="truncate text-white/85">{topicName(e.topicId)}</span>
-                <span className="num shrink-0 font-bold text-lime">{e.minutes} min</span>
+                <span className="num shrink-0 font-bold text-lime-ink">{e.minutes} min</span>
               </li>
             ))}
           </ul>

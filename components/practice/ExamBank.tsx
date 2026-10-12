@@ -1,5 +1,7 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Marker from "@/components/ui/Marker";
 import { AlertTriangle, CheckCircle2, ChevronDown, Clock, Eye, EyeOff, FileText, Minus, PenLine, Plus } from "lucide-react";
 import type { AOSplit, ExamQ } from "@/lib/types";
 import { AO_ALLOCATION, AO_INFO, MARKS_META } from "@/lib/data/marking";
@@ -30,7 +32,7 @@ function ModelAnswer({ text }: { text: string }) {
   );
 }
 
-function QuestionCard({
+export function QuestionCard({
   q,
   open,
   onToggle,
@@ -48,13 +50,14 @@ function QuestionCard({
   setMarks: (m: BankMarks[string]) => void;
 }) {
   const [reveal, setReveal] = useState(false);
+  const pathname = usePathname();
   const alloc = AO_ALLOCATION[q.marks];
   const meta = MARKS_META[q.marks];
   const ao = marks?.ao ?? ZERO;
   const got = ao.ao1 + ao.ao2 + ao.ao3 + ao.ao4;
   const words = draft.trim() ? draft.trim().split(/\s+/).length : 0;
   const [lo, hi] = meta.words.split(" to ").map(Number);
-  const wordTone = words === 0 ? "text-slate-500" : words < lo * 0.7 ? "text-amber-300" : words > hi * 1.4 ? "text-amber-300" : "text-emerald-300";
+  const wordTone = words === 0 ? "text-slate-500" : words < lo * 0.7 ? "text-amber-700 dark:text-amber-300" : words > hi * 1.4 ? "text-amber-700 dark:text-amber-300" : "text-emerald-700 dark:text-emerald-300";
 
   const level = meta.levels.find((l) => {
     const [a, b] = l.range.split("-").map(Number);
@@ -68,7 +71,8 @@ function QuestionCard({
   };
 
   return (
-    <article id={q.id} className="card overflow-hidden scroll-mt-40">
+    <article id={q.id} className="card relative overflow-hidden scroll-mt-40">
+      <Marker id={q.id} label={q.question} href={`${pathname}?view=questions&open=${q.id}`} className="absolute right-14 top-5 z-10" />
       <button onClick={onToggle} aria-expanded={open} className="flex w-full items-start gap-4 p-5 text-left transition hover:bg-white/[0.03] sm:p-6">
         <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-accent/40 bg-accent/15 shadow-glow">
           <span className="num text-2xl font-bold leading-none text-white">{q.marks}</span>
@@ -79,7 +83,7 @@ function QuestionCard({
             <span className="chip">{q.command}</span>
             <span className="text-xs text-slate-400">{topicTitle(q.topic)}</span>
             {marks && marks.got > 0 && (
-              <span className="num inline-flex items-center gap-1 rounded-full bg-emerald-400/15 px-2 py-0.5 text-xs font-semibold text-emerald-300">
+              <span className="num inline-flex items-center gap-1 rounded-full bg-emerald-400/15 px-2 py-0.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
                 <CheckCircle2 className="h-3 w-3" /> {marks.got}/{marks.max}
               </span>
             )}
@@ -123,7 +127,7 @@ function QuestionCard({
               onChange={(e) => setDraft(e.target.value)}
               rows={q.marks >= 9 ? 12 : q.marks >= 6 ? 8 : 4}
               placeholder="Type your answer here. It is saved in your browser automatically."
-              className="w-full resize-y rounded-xl border border-white/10 bg-black/20 p-4 text-[15px] leading-relaxed text-white placeholder:text-slate-600 focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40"
+              className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.05] p-4 text-[15px] leading-relaxed text-white placeholder:text-slate-600 focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40"
             />
           </div>
 
@@ -144,11 +148,11 @@ function QuestionCard({
                         <p className="num text-xs font-bold tracking-widest">{a.code}</p>
                         <p className="text-[11px] text-slate-200">{a.name}</p>
                         <div className="mt-2 flex items-center justify-between">
-                          <button disabled={!max || v <= 0} onClick={() => bump(a.key, -1)} aria-label={`Decrease ${a.code}`} className="grid h-7 w-7 place-items-center rounded-lg bg-black/25 text-white disabled:opacity-30">
+                          <button disabled={!max || v <= 0} onClick={() => bump(a.key, -1)} aria-label={`Decrease ${a.code}`} className="grid h-7 w-7 place-items-center rounded-lg bg-white/[0.05] text-white disabled:opacity-30">
                             <Minus className="h-3.5 w-3.5" />
                           </button>
                           <span className="num text-lg font-bold text-white">{v}<span className="text-sm font-normal text-slate-400">/{max}</span></span>
-                          <button disabled={!max || v >= max} onClick={() => bump(a.key, 1)} aria-label={`Increase ${a.code}`} className="grid h-7 w-7 place-items-center rounded-lg bg-black/25 text-white disabled:opacity-30">
+                          <button disabled={!max || v >= max} onClick={() => bump(a.key, 1)} aria-label={`Increase ${a.code}`} className="grid h-7 w-7 place-items-center rounded-lg bg-white/[0.05] text-white disabled:opacity-30">
                             <Plus className="h-3.5 w-3.5" />
                           </button>
                         </div>
@@ -185,7 +189,7 @@ function QuestionCard({
 
               <section>
                 <h4 className="eyebrow mb-2">Model answer (with AO tags)</h4>
-                <div className="rounded-xl border border-white/10 bg-black/20 p-5">
+                <div className="rounded-xl border border-white/10 bg-white/[0.05] p-5">
                   <ModelAnswer text={q.model} />
                 </div>
               </section>

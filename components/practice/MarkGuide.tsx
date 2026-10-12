@@ -51,7 +51,7 @@ export default function MarkGuide() {
         </h4>
         <Flow steps={CHAIN} tone="green" />
         <div className="mt-3 grid gap-3 md:grid-cols-2">
-          <div className="rounded-xl border border-lime/40 bg-lime/[0.06] p-4">
+          <div className="rounded-xl border border-lime-ink/40 bg-lime/[0.06] p-4">
             <p className="eyebrow mb-1.5">Sentence starters</p>
             <p className="text-sm leading-relaxed text-white/90">which means that… · this leads to… · as a result… · therefore… · this reduces/increases… so…</p>
           </div>
@@ -75,7 +75,7 @@ export default function MarkGuide() {
         </h4>
         <Flow steps={JUDGE} tone="lime" />
         <div className="mt-3 grid gap-3 md:grid-cols-2">
-          <div className="rounded-xl border border-lime/40 bg-lime/[0.06] p-4">
+          <div className="rounded-xl border border-lime-ink/40 bg-lime/[0.06] p-4">
             <p className="eyebrow mb-1.5">Sentence starters</p>
             <p className="text-sm leading-relaxed text-white/90">On balance… · The most significant factor is… · This depends on… · However, this is outweighed by… · I would reject X because…</p>
           </div>
@@ -109,7 +109,7 @@ export default function MarkGuide() {
               ["12 · Justify", "Decision up front, three weighed arguments, reject the alternative", "16 min"],
             ].map(([a, b, c]) => (
               <tr key={a}>
-                <td className="px-4 py-2.5 font-bold text-lime">{a}</td>
+                <td className="px-4 py-2.5 font-bold text-lime-ink">{a}</td>
                 <td className="px-4 py-2.5 text-white/85">{b}</td>
                 <td className="num px-4 py-2.5 text-white/60">{c}</td>
               </tr>

@@ -78,7 +78,7 @@ export default function ProductLifeCycle() {
       <div className="mb-4 flex flex-wrap gap-2 no-print">
         <button
           onClick={() => setShowProfit((v) => !v)}
-          className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition ${showProfit ? "border-[#DBE64C]/60 bg-[#DBE64C]/10 text-[#DBE64C]" : "border-white/10 text-slate-400"}`}
+          className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition ${showProfit ? "border-lime-ink/60 bg-[#DBE64C]/10 text-lime-ink" : "border-white/10 text-slate-400"}`}
         >
           {showProfit ? "Hide profit curve" : "Show profit curve"}
         </button>
@@ -120,10 +120,10 @@ export default function ProductLifeCycle() {
 
         {showProfit && (
           <>
-            <line x1={AX} x2={650} y1={222} y2={222} className="stroke-[#DBE64C]/40" strokeDasharray="4 4" />
-            <text x={AX + 4} y={216} className="fill-[#DBE64C]/80 text-[10px]">zero profit</text>
-            <path d={PROFIT} fill="none" className="stroke-[#DBE64C]" strokeWidth={2.5} />
-            <text x={392} y={90} className="fill-[#DBE64C] text-[11px] font-semibold">Profit</text>
+            <line x1={AX} x2={650} y1={222} y2={222} className="stroke-lime-ink/40" strokeDasharray="4 4" />
+            <text x={AX + 4} y={216} className="fill-lime-ink/80 text-[10px]">zero profit</text>
+            <path d={PROFIT} fill="none" className="stroke-lime-ink" strokeWidth={2.5} />
+            <text x={392} y={90} className="fill-lime-ink text-[11px] font-semibold">Profit</text>
           </>
         )}
         <path d={SALES} fill="none" className="stroke-accent" strokeWidth={4} strokeLinecap="round" />
