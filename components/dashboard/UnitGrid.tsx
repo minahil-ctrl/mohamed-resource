@@ -22,10 +22,10 @@ export default function UnitGrid({ focus = "both" }: { focus?: "learn" | "practi
             style={unitVars(u) as React.CSSProperties}
             className="card card-hover group relative flex flex-col overflow-hidden p-6"
           >
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/20 blur-3xl transition group-hover:bg-accent/35" />
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-nuit/30 blur-3xl transition group-hover:bg-accent/35" />
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
             <div className="relative flex items-start justify-between">
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent text-white shadow-glow">
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent text-shell shadow-glow">
                 <UnitIcon icon={u.icon} className="h-6 w-6" />
               </span>
               <span className="num text-5xl font-bold text-white/[0.08]">0{u.number}</span>

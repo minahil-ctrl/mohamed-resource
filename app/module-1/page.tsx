@@ -12,7 +12,7 @@ export default function Module1Hub() {
           <span className="grad-text">Comprehensive crash-course cheat sheets</span>
         </h1>
         <p className="mt-3 max-w-2xl text-lg text-slate-300">
-          25 topics across five units. Each has high-yield points, Edexcel-style definitions, formulas, an examiner&apos;s red-flag banner and an application bank
+          26 topics across five units. Each has a key definition, must-know points, advantage and disadvantage tables, red-flag traps and an application bank
           for AO2 marks. Interactive graphs are built in.
         </p>
       </header>

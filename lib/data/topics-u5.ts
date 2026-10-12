@@ -51,7 +51,7 @@ export const topicsU5: Topic[] = [
   },
   {
     id: "u5-breakeven",
-    code: "5.2",
+    code: "5.3",
     title: "Costs, Revenue & Break-Even",
     blurb: "The most calculation-heavy topic. Practise until automatic.",
     points: [
@@ -108,7 +108,7 @@ export const topicsU5: Topic[] = [
   },
   {
     id: "u5-cashflow",
-    code: "5.3",
+    code: "5.2",
     title: "Cash Flow & Working Capital",
     blurb: "Why profitable businesses still fail.",
     points: [
@@ -164,19 +164,17 @@ export const topicsU5: Topic[] = [
   {
     id: "u5-statements",
     code: "5.4",
-    title: "Financial Statements & Ratios",
-    blurb: "Income statements, the balance sheet, and ratio analysis.",
+    title: "Income Statement & Statement of Financial Position",
+    blurb: "What the two main accounts show, line by line.",
     points: [
-      "Income statement: revenue − cost of sales = gross profit; gross profit − expenses = net (operating) profit.",
-      "Statement of financial position (balance sheet): assets = liabilities + equity at a point in time.",
-      "Assets: non-current (machinery, buildings) and current (inventory, receivables, cash). Liabilities: current (due within a year) and non-current.",
-      "Gross profit margin = gross profit ÷ revenue × 100. Net profit margin = net profit ÷ revenue × 100.",
-      "ROCE = operating profit ÷ capital employed × 100. Capital employed = non-current liabilities + equity.",
-      "Interpret ratios by comparing over time, against competitors and against the industry. One figure alone proves nothing.",
-      "To improve gross margin: raise prices or cut cost of sales. To improve net margin: also cut overheads.",
+      "Income statement (profit and loss): revenue − cost of sales = gross profit; gross profit − expenses = net (operating) profit.",
+      "Statement of financial position (balance sheet): a snapshot of what the business owns, owes and is worth on one date.",
+      "Accounting equation: assets = liabilities + equity.",
+      "Non-current assets last over a year (machinery, buildings, vehicles). Current assets are cash, inventory and receivables.",
+      "Current liabilities are due within a year (payables, overdraft). Non-current liabilities are long-term (bank loans).",
+      "Equity is the owners' stake: share capital plus retained profit.",
       "Depreciation spreads the cost of a non-current asset over its useful life.",
       "Users of accounts: owners, managers, lenders, employees, suppliers, tax authorities.",
-      "Limitations: based on past data, can be affected by one-off events, and ignore non-financial factors.",
     ],
     terms: [
       { term: "Revenue", def: "Income from sales: price multiplied by quantity sold." },
@@ -186,30 +184,73 @@ export const topicsU5: Topic[] = [
       { term: "Assets", def: "Resources owned by a business that have value." },
       { term: "Liabilities", def: "Amounts a business owes to others." },
       { term: "Equity", def: "The owners' stake: share capital plus retained profit." },
+    ],
+    formulas: [
+      { name: "Gross profit", expr: "Revenue − cost of sales" },
+      { name: "Net profit", expr: "Gross profit − expenses" },
+      { name: "Accounting equation", expr: "Assets = liabilities + equity" },
+    ],
+    redFlags: [
+      "Confusing assets and liabilities. Inventory and receivables are ASSETS.",
+      "Net profit = gross profit − expenses, NOT revenue − expenses.",
+      "Treating the balance sheet as a record of a period. It is a snapshot at one date.",
+    ],
+    applications: [
+      {
+        title: "Supermarket margins",
+        concept: "Gross vs net profit",
+        scenario:
+          "FreshMart has a 25% gross margin but only a 3% net margin. Staff, rent and energy overheads absorb most of the gross profit.",
+        tip: "Diagnose: 'The wide gap between gross and net profit shows overheads are high, not the cost of stock.'",
+      },
+      {
+        title: "Stock on the shelf",
+        concept: "Current assets",
+        scenario:
+          "A convenience store's shelves of stock are a current asset. If the stock does not sell, it is cash trapped on the balance sheet.",
+        tip: "Link to cash: 'Unsold inventory is a current asset but it ties up cash the business cannot spend.'",
+      },
+    ],
+  },
+  {
+    id: "u5-ratios",
+    code: "5.5",
+    title: "Ratio Analysis",
+    blurb: "Gross margin, net margin and ROCE, and how to interpret them.",
+    points: [
+      "Gross profit margin = gross profit ÷ revenue × 100. It shows how much of each sale is left after direct costs.",
+      "Net profit margin = net profit ÷ revenue × 100. It shows profit after overheads.",
+      "ROCE = operating profit ÷ capital employed × 100. It shows the return on money invested in the business.",
+      "Capital employed = non-current liabilities + equity.",
+      "Interpret ratios by comparing over time, against competitors and against the industry. One figure alone proves nothing.",
+      "To improve gross margin: raise prices or cut cost of sales. To improve net margin: also cut overheads.",
+      "Compare ROCE with the bank interest rate: it should be higher to justify the risk.",
+      "Limitations: based on past data, can be affected by one-off events, and ignore non-financial factors.",
+    ],
+    terms: [
+      { term: "Gross profit margin", def: "Gross profit as a percentage of revenue." },
+      { term: "Net profit margin", def: "Net profit as a percentage of revenue." },
       { term: "Capital employed", def: "Long-term funds invested in the business: non-current liabilities plus equity." },
       { term: "ROCE", def: "Return on capital employed: operating profit as a percentage of capital employed." },
     ],
     formulas: [
-      { name: "Gross profit", expr: "Revenue − cost of sales" },
       { name: "Gross profit margin (%)", expr: "(Gross profit ÷ revenue) × 100" },
-      { name: "Net profit", expr: "Gross profit − expenses" },
       { name: "Net profit margin (%)", expr: "(Net profit ÷ revenue) × 100" },
       { name: "ROCE (%)", expr: "(Operating profit ÷ capital employed) × 100" },
       { name: "Capital employed", expr: "Non-current liabilities + equity" },
     ],
     redFlags: [
-      "Writing a ratio without % or without 'per year' context.",
+      "Writing a ratio without the % sign.",
       "Drawing a conclusion from one year of figures. Compare against last year, rivals or the industry.",
-      "Confusing assets and liabilities. Inventory and receivables are ASSETS.",
-      "Checking only the headline ratio. Always say WHY it moved (price, cost of sales or overheads).",
+      "Quoting the number without saying WHY it moved (price, cost of sales or overheads).",
     ],
     applications: [
       {
-        title: "Supermarket margins",
-        concept: "Gross vs net margin",
+        title: "Cheaper sugar supplier",
+        concept: "Gross margin",
         scenario:
-          "FreshMart has a 25% gross margin but only a 3% net margin. Staff, rent and energy overheads absorb most of the gross profit.",
-        tip: "Diagnose: 'The wide gap between gross and net margin shows overheads are high, not the cost of stock.'",
+          "A beverage brand's gross margin rises after switching to a cheaper sugar supplier, because cost of sales falls while revenue stays the same.",
+        tip: "Give the cause: 'Lower cost of sales raised the gross profit margin.'",
       },
       {
         title: "ROCE vs the bank",
@@ -223,7 +264,7 @@ export const topicsU5: Topic[] = [
   },
   {
     id: "u5-invest",
-    code: "5.5",
+    code: "5.6",
     title: "Investment Appraisal & Budgets",
     blurb: "Deciding whether a project pays, and controlling spending.",
     points: [

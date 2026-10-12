@@ -8,9 +8,9 @@ export const UNITS: Unit[] = [
     name: "Business Activity",
     short: "Business Activity",
     tagline: "Enterprise, ownership, markets, the outside world and growth.",
-    hex: "#4F46E5",
-    rgb: [79, 70, 229],
-    soft: [165, 180, 252],
+    hex: "#74C365",
+    rgb: [116, 195, 101],
+    soft: [219, 230, 76],
     icon: "lightbulb",
     caseStudy: {
       name: "Crescent Juices Ltd",
@@ -25,9 +25,9 @@ export const UNITS: Unit[] = [
     name: "People in Business",
     short: "People / HR",
     tagline: "Structures, hiring, training, motivation and leadership.",
-    hex: "#E11D48",
-    rgb: [225, 29, 72],
-    soft: [253, 164, 175],
+    hex: "#74C365",
+    rgb: [116, 195, 101],
+    soft: [219, 230, 76],
     icon: "users",
     caseStudy: {
       name: "FreshMart",
@@ -41,9 +41,9 @@ export const UNITS: Unit[] = [
     name: "Marketing",
     short: "Marketing",
     tagline: "Research, product, price, promotion and place.",
-    hex: "#059669",
-    rgb: [5, 150, 105],
-    soft: [110, 231, 183],
+    hex: "#74C365",
+    rgb: [116, 195, 101],
+    soft: [219, 230, 76],
     icon: "megaphone",
     caseStudy: {
       name: "Zing Drinks",
@@ -57,9 +57,9 @@ export const UNITS: Unit[] = [
     name: "Business Operations",
     short: "Operations",
     tagline: "Production, efficiency, quality, supply chains and location.",
-    hex: "#0891B2",
-    rgb: [8, 145, 178],
-    soft: [103, 232, 249],
+    hex: "#74C365",
+    rgb: [116, 195, 101],
+    soft: [219, 230, 76],
     icon: "factory",
     caseStudy: {
       name: "Golden Crust Biscuits",
@@ -73,9 +73,9 @@ export const UNITS: Unit[] = [
     name: "Financial Information & Decisions",
     short: "Finance",
     tagline: "Sources of finance, break-even, cash flow, accounts and appraisal.",
-    hex: "#D97706",
-    rgb: [217, 119, 6],
-    soft: [252, 211, 77],
+    hex: "#74C365",
+    rgb: [116, 195, 101],
+    soft: [219, 230, 76],
     icon: "landmark",
     caseStudy: {
       name: "Daily Basket",
@@ -84,7 +84,7 @@ export const UNITS: Unit[] = [
   },
 ];
 
-export const HOME_ACCENT = { rgb: [226, 178, 74] as [number, number, number], soft: [243, 214, 140] as [number, number, number], hex: "#E2B24A" };
+export const HOME_ACCENT = { rgb: [116, 195, 101] as [number, number, number], soft: [219, 230, 76] as [number, number, number], hex: "#74C365" };
 
 export const unitById = (id: UnitId): Unit => UNITS.find((u) => u.id === id)!;
 export const unitBySlug = (slug: string): Unit | undefined => UNITS.find((u) => u.slug === slug);

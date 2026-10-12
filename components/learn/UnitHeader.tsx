@@ -15,7 +15,7 @@ export default function UnitHeader({
   const other = module === 1 ? "/module-2" : "/module-1";
   return (
     <header className="card relative overflow-hidden border-accent/40 p-6 sm:p-9">
-      <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-accent/25 blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-nuit/30 blur-3xl" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
       <div className="relative flex flex-wrap items-start justify-between gap-6">
         <div className="max-w-3xl">

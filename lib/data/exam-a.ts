@@ -32,11 +32,11 @@ export const examA: ExamQ[] = [
     question: "Explain one benefit to Crescent Juices of being a private limited company rather than a sole trader.",
     indicative: [
       "AO1: limited liability / separate legal entity / can sell shares privately to raise capital.",
-      "AO2: applied to the Hassan family and the $90,000 bottling line.",
+      "AO3 (in context): applied to the Hassan family and the $90,000 bottling line.",
       "AO3: development, e.g. owners' personal assets protected, so they are more willing to take the risk of expanding.",
     ],
     model:
-      "Being a private limited company gives the Hassan family limited liability [AO1]. This means that if the $90,000 bottling line fails to pay for itself and Crescent cannot repay its debts, the family can lose only the money they put into the company, not their homes or personal savings [AO2]. As a result, they are more willing to take the risk of investing in the new line, which could increase output and profit [AO3].",
+      "Being a private limited company gives the Hassan family limited liability [AO1]. This means that if the $90,000 bottling line fails to pay for itself and Crescent cannot repay its debts, the family can lose only the money they put into the company, not their homes or personal savings [AO3]. As a result, they are more willing to take the risk of investing in the new line, which could increase output and profit [AO3].",
     traps: [
       "'The business cannot go bankrupt'. The company can still fail; only the owners are protected.",
       "Stating 'limited liability' and stopping. Develop the consequence for the owners.",
@@ -141,11 +141,11 @@ export const examA: ExamQ[] = [
     question: "Explain one disadvantage to FreshMart of having a tall organisational structure.",
     indicative: [
       "AO1: slow communication / higher management costs / remote senior managers.",
-      "AO2: eight layers; 12 stores.",
+      "AO3 (in context): eight layers; 12 stores.",
       "AO3: development, e.g. slow decisions so late reaction to competitors' prices and lost sales.",
     ],
     model:
-      "A tall structure slows communication [AO1]. With eight layers between a store assistant and the Chief Executive, a request to match a rival's price promotion must pass through many managers before it is approved [AO2]. This delay means FreshMart reacts slowly to competitors, so it may lose customers and sales [AO3].",
+      "A tall structure slows communication [AO1]. With eight layers between a store assistant and the Chief Executive, a request to match a rival's price promotion must pass through many managers before it is approved [AO3]. This delay means FreshMart reacts slowly to competitors, so it may lose customers and sales [AO3].",
     traps: ["Stating 'it is expensive' with no explanation (more managers' salaries)."],
   },
   {
@@ -248,11 +248,11 @@ export const examA: ExamQ[] = [
     question: "Explain one reason why Zing Drinks might use primary research before launching Zing Zero.",
     indicative: [
       "AO1: primary research is first-hand and specific to the product/market.",
-      "AO2: 16-25 year old target market; $500,000 launch.",
+      "AO3 (in context): 16-25 year old target market; $500,000 launch.",
       "AO3: development, e.g. taste tests identify flavours that appeal, reducing the risk of a costly failed launch.",
     ],
     model:
-      "Primary research collects new, first-hand information that is specific to Zing Zero [AO1]. By running taste tests and surveys with 16-25 year olds, Zing Drinks can find out which flavour and price appeal to its target market [AO2]. This reduces the risk of losing the $500,000 launch budget on a product customers do not want [AO3].",
+      "Primary research collects new, first-hand information that is specific to Zing Zero [AO1]. By running taste tests and surveys with 16-25 year olds, Zing Drinks can find out which flavour and price appeal to its target market [AO3]. This reduces the risk of losing the $500,000 launch budget on a product customers do not want [AO3].",
     traps: [
       "Describing what primary research is but not why THIS firm would use it.",
       "Researching the wrong group (e.g. all adults) instead of 16-25 year olds.",

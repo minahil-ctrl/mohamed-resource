@@ -53,7 +53,7 @@ export const topicsU1: Topic[] = [
   },
   {
     id: "u1-ownership",
-    code: "1.2",
+    code: "1.4",
     title: "Ownership, Aims & Stakeholders",
     blurb: "Legal structures, who bears the risk, and who cares about the business.",
     points: [
@@ -101,7 +101,7 @@ export const topicsU1: Topic[] = [
   },
   {
     id: "u1-markets",
-    code: "1.3",
+    code: "1.2",
     title: "Markets: Supply & Demand",
     blurb: "How prices are set and why they move.",
     points: [
@@ -153,7 +153,7 @@ export const topicsU1: Topic[] = [
   },
   {
     id: "u1-external",
-    code: "1.4",
+    code: "1.6",
     title: "External Influences on Business",
     blurb: "The things a firm cannot control but must react to.",
     points: [
@@ -201,7 +201,7 @@ export const topicsU1: Topic[] = [
   },
   {
     id: "u1-growth",
-    code: "1.5",
+    code: "1.3",
     title: "Business Growth",
     blurb: "How firms get bigger, and what can go wrong.",
     points: [
@@ -244,6 +244,54 @@ export const topicsU1: Topic[] = [
         scenario:
           "A large chain buys a rival with 30 stores. Combined buying power wins bigger supplier discounts, yet merging store cultures and brands is difficult.",
         tip: "Quote the benefit AND the cost: 'Economies of scale through bulk buying, but culture clash could lower staff morale.'",
+      },
+    ],
+  },
+  {
+    id: "u1-location",
+    code: "1.5",
+    title: "Location, Technology & E-commerce",
+    blurb: "Where to operate, and how technology changes operations.",
+    points: [
+      "Location factors: proximity to market, raw materials, labour skills and cost, transport links, rent/rates, incentives, competitors and room to expand.",
+      "Retailers prioritise footfall, visibility and parking. Manufacturers prioritise costs, transport and labour.",
+      "Offshoring moves operations abroad for cheaper labour or materials, but adds transport, communication and ethical risk.",
+      "Technology: CAD/CAM, EPOS, barcodes/RFID, ERP and data analytics help control stock, quality and cost.",
+      "E-commerce lets businesses sell 24/7 with lower premises costs, but needs delivery systems and strong IT security.",
+      "Planning permission and environmental laws limit where and how firms can operate.",
+      "Clusters of similar firms share suppliers, skilled labour and infrastructure.",
+      "Sustainable operations: recycling, energy saving, and cutting transport miles reduce cost and improve image.",
+      "A location decision is a long-term, expensive choice that is hard to reverse.",
+    ],
+    terms: [
+      { term: "Footfall", def: "The number of people passing or entering a retail location." },
+      { term: "Offshoring", def: "Moving business operations to another country, usually to cut costs." },
+      { term: "EPOS", def: "Electronic Point of Sale: a till system that records sales and updates stock automatically." },
+      { term: "CAD", def: "Computer-aided design: using software to design products." },
+      { term: "E-commerce", def: "Selling goods and services over the internet." },
+      { term: "Planning permission", def: "Official permission needed before building or changing the use of premises." },
+      { term: "Infrastructure", def: "Roads, rail, ports, power and broadband that support business activity." },
+      { term: "Cluster", def: "A geographic concentration of firms in the same industry." },
+    ],
+    redFlags: [
+      "Listing location factors without ranking them or tying them to the case (retail vs manufacturing).",
+      "Saying 'cheap labour' as the reason to locate a local retail outlet. It is relevant to manufacturing, not footfall.",
+      "Claiming technology 'saves time' with no specific benefit (fewer stock-outs, fewer errors) or cost (set-up, training).",
+    ],
+    applications: [
+      {
+        title: "Store by the bus terminal",
+        concept: "Retail location",
+        scenario:
+          "A convenience store opens beside a busy bus terminal. Rent is high, but constant footfall delivers daily sales.",
+        tip: "Justify with the business type: 'For retail, footfall matters more than low rent.'",
+      },
+      {
+        title: "EPOS-triggered restocking",
+        concept: "Technology",
+        scenario:
+          "Each scanned item updates stock data and triggers orders automatically, cutting stock-outs and staff time in a supermarket chain.",
+        tip: "Use cause and effect: 'EPOS gives real-time stock data, so shelves are refilled before they empty.'",
       },
     ],
   },

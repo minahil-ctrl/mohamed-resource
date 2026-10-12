@@ -58,12 +58,12 @@ export default function BreakEven() {
           <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Break-even chart">
             <defs>
               <linearGradient id="be-profit" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.35" />
-                <stop offset="100%" stopColor="#10b981" stopOpacity="0.05" />
+                <stop offset="0%" stopColor="#74C365" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#74C365" stopOpacity="0.05" />
               </linearGradient>
               <linearGradient id="be-loss" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#f43f5e" stopOpacity="0.05" />
+                <stop offset="0%" stopColor="#1E488F" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#1E488F" stopOpacity="0.05" />
               </linearGradient>
             </defs>
             {yt.map((t) => (
@@ -103,7 +103,7 @@ export default function BreakEven() {
               Fixed costs
             </text>
 
-            <line x1={sx(0)} y1={sy(tc(0))} x2={sx(xmax)} y2={sy(tc(xmax))} className="stroke-rose-400" strokeWidth={2.5} />
+            <line x1={sx(0)} y1={sy(tc(0))} x2={sx(xmax)} y2={sy(tc(xmax))} className="stroke-white" strokeWidth={2.5} />
             <line x1={sx(0)} y1={sy(0)} x2={sx(xmax)} y2={sy(rev(xmax))} className="stroke-accent" strokeWidth={3} />
             <text
               x={sx(xmax) - 4}
@@ -117,25 +117,25 @@ export default function BreakEven() {
               x={sx(xmax) - 4}
               y={sy(tc(xmax)) + (price >= vc ? 16 : -8)}
               textAnchor="end"
-              className="fill-rose-300 text-[12px] font-semibold"
+              className="fill-white text-[12px] font-semibold"
             >
               Total costs
             </text>
 
-            <line x1={sx(fcast)} x2={sx(fcast)} y1={T} y2={H - B} className="stroke-sky-300" strokeDasharray="3 4" />
-            <text x={sx(fcast) + 5} y={T + 12} className="fill-sky-300 text-[11px]">
+            <line x1={sx(fcast)} x2={sx(fcast)} y1={T} y2={H - B} className="stroke-white/70" strokeDasharray="3 4" />
+            <text x={sx(fcast) + 5} y={T + 12} className="fill-white text-[11px]">
               Forecast {fmt(fcast)}
             </text>
             {bep && mos !== null && mos > 0 && (
               <g>
-                <line x1={sx(bep)} x2={sx(fcast)} y1={H - B - 14} y2={H - B - 14} className="stroke-emerald-300" strokeWidth={2} />
-                <line x1={sx(bep)} x2={sx(bep)} y1={H - B - 20} y2={H - B - 8} className="stroke-emerald-300" strokeWidth={2} />
-                <line x1={sx(fcast)} x2={sx(fcast)} y1={H - B - 20} y2={H - B - 8} className="stroke-emerald-300" strokeWidth={2} />
+                <line x1={sx(bep)} x2={sx(fcast)} y1={H - B - 14} y2={H - B - 14} className="stroke-[#DBE64C]" strokeWidth={2} />
+                <line x1={sx(bep)} x2={sx(bep)} y1={H - B - 20} y2={H - B - 8} className="stroke-[#DBE64C]" strokeWidth={2} />
+                <line x1={sx(fcast)} x2={sx(fcast)} y1={H - B - 20} y2={H - B - 8} className="stroke-[#DBE64C]" strokeWidth={2} />
                 <text
                   x={(sx(bep) + sx(fcast)) / 2}
                   y={H - B - 24}
                   textAnchor="middle"
-                  className="fill-emerald-300 text-[11px] font-semibold"
+                  className="fill-[#DBE64C] text-[11px] font-semibold"
                 >
                   Margin of safety {fmt(Math.round(mos))}
                 </text>
@@ -154,7 +154,7 @@ export default function BreakEven() {
               </g>
             )}
             {!bep && (
-              <text x={(L + W) / 2} y={T + 40} textAnchor="middle" className="fill-rose-300 text-[13px] font-semibold">
+              <text x={(L + W) / 2} y={T + 40} textAnchor="middle" className="fill-white text-[13px] font-semibold">
                 Variable cost is not below price: the business can never break even
               </text>
             )}

@@ -6,7 +6,7 @@ import type { AOSplit, ExamMarks } from "../types";
  */
 export const AO_ALLOCATION: Record<ExamMarks, AOSplit> = {
   2: { ao1: 2, ao2: 0, ao3: 0, ao4: 0 },
-  3: { ao1: 1, ao2: 1, ao3: 1, ao4: 0 },
+  3: { ao1: 1, ao2: 0, ao3: 2, ao4: 0 },
   6: { ao1: 1, ao2: 2, ao3: 3, ao4: 0 },
   9: { ao1: 2, ao2: 2, ao3: 2, ao4: 3 },
   12: { ao1: 2, ao2: 3, ao3: 3, ao4: 4 },
@@ -63,11 +63,11 @@ export const MARKS_META: Record<
     command: "Explain",
     minutes: 4,
     words: "35 to 55",
-    structure: "Point, apply to the case, develop with a consequence (one chain).",
+    structure: "Knowledge point, then ONE developed chain of analysis (cause, effect, consequence in context).",
     levels: [
       { range: "1", title: "Identify", text: "A relevant point with no development." },
-      { range: "2", title: "Apply", text: "Point linked to the business context." },
-      { range: "3", title: "Develop", text: "Clear logical consequence in context." },
+      { range: "2", title: "Analyse", text: "Point linked to a consequence for the business." },
+      { range: "3", title: "Develop", text: "Chain developed to a clear, logical consequence in context." },
     ],
   },
   6: {

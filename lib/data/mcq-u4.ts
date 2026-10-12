@@ -207,7 +207,7 @@ export const mcqU4: MCQ[] = mk("u4", [
     ],
   ],
   [
-    "u4-location",
+    "u1-location",
     "Which factor is MOST important when locating a convenience store?",
     ["Cheap labour overseas", "High footfall", "Proximity to raw materials", "Large factory floor space"],
     1,
@@ -219,7 +219,7 @@ export const mcqU4: MCQ[] = mk("u4", [
     ],
   ],
   [
-    "u4-location",
+    "u1-location",
     "Moving production to another country to reduce labour costs is:",
     ["Reshoring", "Offshoring", "Delayering", "Outsourcing to the local market"],
     1,

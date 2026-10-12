@@ -12,12 +12,13 @@ import { mcqU5 } from "./mcq-u5";
 import { examA } from "./exam-a";
 import { examB } from "./exam-b";
 
+const byCode = (a: Topic, b: Topic) => parseFloat(a.code.split(".")[1]) - parseFloat(b.code.split(".")[1]);
 export const TOPICS: Record<UnitId, Topic[]> = {
-  u1: topicsU1,
-  u2: topicsU2,
-  u3: topicsU3,
-  u4: topicsU4,
-  u5: topicsU5,
+  u1: [...topicsU1].sort(byCode),
+  u2: [...topicsU2].sort(byCode),
+  u3: [...topicsU3].sort(byCode),
+  u4: [...topicsU4].sort(byCode),
+  u5: [...topicsU5].sort(byCode),
 };
 
 export const MCQS: Record<UnitId, MCQ[]> = {

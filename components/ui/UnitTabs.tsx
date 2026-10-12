@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { UNITS, unitVars } from "@/lib/units";
-import UnitIcon from "./UnitIcon";
+import { UNITS } from "@/lib/units";
 
 export default function UnitTabs({ base, active, query }: { base: "/module-1" | "/module-2"; active: string; query?: string }) {
   return (
@@ -9,27 +8,18 @@ export default function UnitTabs({ base, active, query }: { base: "/module-1" | 
         {UNITS.map((u) => {
           const isActive = u.slug === active;
           return (
-            <li key={u.id} style={unitVars(u) as React.CSSProperties}>
+            <li key={u.id}>
               <Link
                 href={`${base}/${u.slug}${query ?? ""}`}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-sm font-medium transition duration-300 ${
+                className={`flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-sm font-semibold transition duration-200 ${
                   isActive
-                    ? "border-accent/70 bg-accent/20 text-white shadow-glow"
-                    : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-accent/50 hover:bg-accent/10 hover:text-white"
+                    ? "border-accent bg-accent text-shell"
+                    : "border-white/15 bg-white/[0.04] text-white/85 hover:border-accent hover:text-white"
                 }`}
               >
-                <span
-                  className={`grid h-7 w-7 place-items-center rounded-lg text-xs font-bold transition ${
-                    isActive ? "bg-accent text-white" : "bg-accent/15 text-soft group-hover:bg-accent/30"
-                  }`}
-                >
-                  <UnitIcon icon={u.icon} className="h-4 w-4" />
-                </span>
-                <span className="whitespace-nowrap">
-                  <span className="num mr-1.5 text-[11px] opacity-70">U{u.number}</span>
-                  {u.short}
-                </span>
+                <span className={`num text-xs font-bold ${isActive ? "text-shell/70" : "text-lime"}`}>U{u.number}</span>
+                <span className="whitespace-nowrap">{u.short}</span>
               </Link>
             </li>
           );

@@ -7,6 +7,7 @@ import { STUDENT_NAME, DISCLAIMER } from "@/lib/config";
 import TopicCard from "@/components/learn/TopicCard";
 import PrintButton from "@/components/ui/PrintButton";
 import MarkerToolkit from "@/components/practice/MarkerToolkit";
+import MarkGuide from "@/components/practice/MarkGuide";
 import UnitIcon from "@/components/ui/UnitIcon";
 
 export const metadata: Metadata = { title: "Print Booklet" };
@@ -20,7 +21,7 @@ export default function BookletPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-10 px-4 sm:px-6">
       <header className="card relative overflow-hidden border-accent/40 p-8 sm:p-12">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-nuit/30 blur-3xl" />
         <p className="eyebrow flex items-center gap-2"><BookMarked className="h-4 w-4" /> Print-ready booklet</p>
         <h1 className="h-display mt-2 text-5xl font-semibold text-white sm:text-6xl">
           <span className="grad-text">Edexcel IGCSE Business</span>
@@ -63,7 +64,7 @@ export default function BookletPage() {
       {UNITS.map((u) => (
         <section key={u.id} style={unitVars(u) as React.CSSProperties} className="page-break space-y-6">
           <div className="flex items-center gap-4 border-b border-accent/40 pb-4">
-            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-white shadow-glow">
+            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-shell shadow-glow">
               <UnitIcon icon={u.icon} className="h-7 w-7" />
             </span>
             <div>
@@ -72,13 +73,14 @@ export default function BookletPage() {
             </div>
           </div>
           {TOPICS[u.id].map((t) => (
-            <TopicCard key={t.id} topic={t} />
+            <TopicCard key={t.id} topic={t} expanded />
           ))}
         </section>
       ))}
 
       <section className="page-break space-y-6">
         <h2 className="font-serif text-3xl font-semibold text-white">Exam technique</h2>
+        <MarkGuide />
         <MarkerToolkit />
         <div className="card p-6">
           <h3 className="mb-4 font-serif text-xl font-semibold text-white">Top 10 red flags</h3>

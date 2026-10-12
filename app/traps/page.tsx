@@ -42,7 +42,7 @@ export default function TrapsPage() {
       {UNITS.map((u) => (
         <section key={u.id} style={unitVars(u) as React.CSSProperties} className="avoid-break">
           <h2 className="mb-4 flex items-center gap-3 font-serif text-2xl font-semibold text-white">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-white shadow-glow">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-shell shadow-glow">
               <UnitIcon icon={u.icon} className="h-5 w-5" />
             </span>
             Unit {u.number}: {u.name}

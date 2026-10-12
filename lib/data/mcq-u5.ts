@@ -171,7 +171,7 @@ export const mcqU5: MCQ[] = mk("u5", [
     ],
   ],
   [
-    "u5-statements",
+    "u5-ratios",
     "Gross profit is $80,000 and revenue is $200,000. The gross profit margin is:",
     ["25%", "40%", "60%", "250%"],
     1,
@@ -183,7 +183,7 @@ export const mcqU5: MCQ[] = mk("u5", [
     ],
   ],
   [
-    "u5-statements",
+    "u5-ratios",
     "Operating profit is $30,000 and capital employed is $250,000. ROCE is:",
     ["8.3%", "12%", "30%", "120%"],
     1,

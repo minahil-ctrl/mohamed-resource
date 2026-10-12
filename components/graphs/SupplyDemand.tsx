@@ -94,15 +94,15 @@ export default function SupplyDemand() {
           <text x={(L + W - R) / 2} y={H - 8} textAnchor="middle" className="fill-slate-300 text-[12px]">Quantity (Q)</text>
           <text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} textAnchor="middle" className="fill-slate-300 text-[12px]">Price (P)</text>
 
-          <line {...D0} className={dShifted ? "stroke-sky-300/35" : "stroke-sky-300"} strokeWidth={dShifted ? 2 : 3} strokeDasharray={dShifted ? "5 5" : undefined} />
-          <line {...S0} className={sShifted ? "stroke-amber-300/35" : "stroke-amber-300"} strokeWidth={sShifted ? 2 : 3} strokeDasharray={sShifted ? "5 5" : undefined} />
-          {dShifted && <line {...D1} className="stroke-sky-300" strokeWidth={3} />}
-          {sShifted && <line {...S1} className="stroke-amber-300" strokeWidth={3} />}
+          <line {...D0} className={dShifted ? "stroke-white/35" : "stroke-white"} strokeWidth={dShifted ? 2 : 3} strokeDasharray={dShifted ? "5 5" : undefined} />
+          <line {...S0} className={sShifted ? "stroke-[#DBE64C]/35" : "stroke-[#DBE64C]"} strokeWidth={sShifted ? 2 : 3} strokeDasharray={sShifted ? "5 5" : undefined} />
+          {dShifted && <line {...D1} className="stroke-white" strokeWidth={3} />}
+          {sShifted && <line {...S1} className="stroke-[#DBE64C]" strokeWidth={3} />}
 
-          <text x={D0.x1 + 6} y={D0.y1 + 14} className="fill-sky-300 text-[12px] font-semibold">D{dShifted ? "₀" : ""}</text>
-          <text x={S0.x2 - 22} y={S0.y2 - 6} className="fill-amber-300 text-[12px] font-semibold">S{sShifted ? "₀" : ""}</text>
-          {dShifted && <text x={D1.x1 + 6} y={D1.y1 + 14} className="fill-sky-300 text-[12px] font-semibold">D₁</text>}
-          {sShifted && <text x={S1.x2 - 22} y={S1.y2 - 6} className="fill-amber-300 text-[12px] font-semibold">S₁</text>}
+          <text x={D0.x1 + 6} y={D0.y1 + 14} className="fill-white text-[12px] font-semibold">D{dShifted ? "₀" : ""}</text>
+          <text x={S0.x2 - 22} y={S0.y2 - 6} className="fill-[#DBE64C] text-[12px] font-semibold">S{sShifted ? "₀" : ""}</text>
+          {dShifted && <text x={D1.x1 + 6} y={D1.y1 + 14} className="fill-white text-[12px] font-semibold">D₁</text>}
+          {sShifted && <text x={S1.x2 - 22} y={S1.y2 - 6} className="fill-[#DBE64C] text-[12px] font-semibold">S₁</text>}
 
           {(dShifted || sShifted) && (
             <g>

@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { AlertTriangle, CheckCircle2, ChevronDown, Clock, Eye, EyeOff, FileText, Minus, PenLine, Plus } from "lucide-react";
 import type { AOSplit, ExamQ } from "@/lib/types";
 import { AO_ALLOCATION, AO_INFO, MARKS_META } from "@/lib/data/marking";
@@ -7,7 +7,6 @@ import { topicTitle } from "@/lib/data";
 import { LS, type BankMarks, useLocalStorage } from "@/lib/useLocalStorage";
 import { AO_TONE } from "./MarkerToolkit";
 
-const MARK_FILTERS = [0, 2, 3, 6, 9, 12] as const;
 const ZERO: AOSplit = { ao1: 0, ao2: 0, ao3: 0, ao4: 0 };
 
 function ModelAnswer({ text }: { text: string }) {
@@ -209,8 +208,14 @@ function QuestionCard({
   );
 }
 
+const GROUPS = [
+  { title: "2-mark", command: "State / Define", marks: [2] as const, desc: "AO1 Knowledge only: a precise definition or two facts. No explanation." },
+  { title: "3-mark", command: "Explain", marks: [3] as const, desc: "Knowledge + Analysis: one point, then one developed chain of reasoning." },
+  { title: "6-mark", command: "Analyse", marks: [6] as const, desc: "Knowledge + Application + Analysis: two developed chains, in the context of the case." },
+  { title: "9 / 12-mark", command: "Evaluate / Justify", marks: [9, 12] as const, desc: "AO1 to AO4: analyse both sides, then reach a justified judgement." },
+];
+
 export default function ExamBank({ questions, initialOpen }: { questions: ExamQ[]; initialOpen?: string }) {
-  const [filter, setFilter] = useState<(typeof MARK_FILTERS)[number]>(0);
   const [openId, setOpenId] = useState<string | null>(initialOpen ?? null);
   const [drafts, setDrafts] = useLocalStorage<Record<string, string>>(LS.drafts, {});
   const [marks, setMarks] = useLocalStorage<BankMarks>(LS.bankMarks, {});
@@ -222,35 +227,51 @@ export default function ExamBank({ questions, initialOpen }: { questions: ExamQ[
     }
   }, [initialOpen]);
 
-  const list = useMemo(() => questions.filter((q) => filter === 0 || q.marks === filter), [questions, filter]);
-
   return (
-    <div className="space-y-5">
-      <div className="no-print flex flex-wrap gap-2">
-        {MARK_FILTERS.map((m) => (
-          <button
-            key={m}
-            onClick={() => setFilter(m)}
-            className={`num rounded-lg border px-3.5 py-1.5 text-sm font-medium transition ${
-              filter === m ? "border-accent/70 bg-accent/20 text-white" : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-accent/40"
-            }`}
-          >
-            {m === 0 ? "All" : `${m}-mark`}
-          </button>
-        ))}
-      </div>
-      {list.map((q) => (
-        <QuestionCard
-          key={q.id}
-          q={q}
-          open={openId === q.id}
-          onToggle={() => setOpenId(openId === q.id ? null : q.id)}
-          draft={drafts[q.id] ?? ""}
-          setDraft={(s) => setDrafts((d) => ({ ...d, [q.id]: s }))}
-          marks={marks[q.id]}
-          setMarks={(m) => setMarks((b) => ({ ...b, [q.id]: m }))}
-        />
-      ))}
+    <div className="space-y-10">
+      {GROUPS.map((g) => {
+        const list = questions.filter((q) => (g.marks as readonly number[]).includes(q.marks));
+        if (!list.length) return null;
+        return (
+          <section key={g.title}>
+            <header className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-lg bg-accent px-3 py-1 text-sm font-extrabold text-shell">{g.title}</span>
+                <h3 className="text-xl font-bold text-white">{g.command}</h3>
+              </div>
+              <p className="mt-2 text-sm text-white/65">{g.desc}</p>
+              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                {g.marks.map((m) => (
+                  <div key={m} className="flex items-center gap-2">
+                    <span className="num text-xs font-bold text-white/60">{m} marks =</span>
+                    {(["ao1", "ao2", "ao3", "ao4"] as const).map((k) =>
+                      AO_ALLOCATION[m][k] > 0 ? (
+                        <span key={k} className={"num rounded-md border px-1.5 py-0.5 text-[11px] font-bold " + AO_TONE[k]}>
+                          {k.toUpperCase()} × {AO_ALLOCATION[m][k]}
+                        </span>
+                      ) : null,
+                    )}
+                  </div>
+                ))}
+              </div>
+            </header>
+            <div className="space-y-4">
+              {list.map((q) => (
+                <QuestionCard
+                  key={q.id}
+                  q={q}
+                  open={openId === q.id}
+                  onToggle={() => setOpenId(openId === q.id ? null : q.id)}
+                  draft={drafts[q.id] ?? ""}
+                  setDraft={(v) => setDrafts((d) => ({ ...d, [q.id]: v }))}
+                  marks={marks[q.id]}
+                  setMarks={(m) => setMarks((b) => ({ ...b, [q.id]: m }))}
+                />
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

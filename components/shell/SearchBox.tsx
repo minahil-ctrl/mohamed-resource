@@ -116,7 +116,7 @@ export default function SearchBox() {
       </div>
 
       {show && (
-        <div className="absolute right-0 top-[calc(100%+10px)] z-50 w-[min(92vw,34rem)] overflow-hidden rounded-2xl border border-white/10 bg-[#0b1224]/95 shadow-lift backdrop-blur-xl">
+        <div className="absolute right-0 top-[calc(100%+10px)] z-50 w-[min(92vw,34rem)] overflow-hidden rounded-2xl border border-white/10 bg-[#00172f]/95 shadow-lift backdrop-blur-xl">
           {hits.length === 0 ? (
             <p className="px-4 py-6 text-sm text-slate-400">No matches. Try a shorter keyword such as “margin” or “loan”.</p>
           ) : (
