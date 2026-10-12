@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Animated accent system ----------
+   Registered numeric custom properties let the whole UI glide from one unit
+   colour to the next when the route changes. */
+@property --ar { syntax: "<number>"; inherits: true; initial-value: 226; }
+@property --ag { syntax: "<number>"; inherits: true; initial-value: 178; }
+@property --ab { syntax: "<number>"; inherits: true; initial-value: 74; }
+@property --sr { syntax: "<number>"; inherits: true; initial-value: 243; }
+@property --sg { syntax: "<number>"; inherits: true; initial-value: 214; }
+@property --sb { syntax: "<number>"; inherits: true; initial-value: 140; }
+
+:root {
+  --ar: 226; --ag: 178; --ab: 74;
+  --sr: 243; --sg: 214; --sb: 140;
+  color-scheme: dark;
+}
+
+.accent-scope {
+  transition: --ar 0.8s ease, --ag 0.8s ease, --ab 0.8s ease,
+    --sr 0.8s ease, --sg 0.8s ease, --sb 0.8s ease;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: rgb(var(--ar) var(--ag) var(--ab) / 0.45); color: #fff; }
+
+/* Atmosphere */
+.atmosphere {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 78% -8%, rgb(var(--ar) var(--ag) var(--ab) / 0.20), transparent 65%),
+    radial-gradient(700px 480px at 6% 12%, rgb(var(--sr) var(--sg) var(--sb) / 0.07), transparent 60%),
+    radial-gradient(1000px 600px at 50% 120%, rgb(var(--ar) var(--ag) var(--ab) / 0.10), transparent 60%);
+}
+.atmosphere::after {
+  content: ""; position: absolute; inset: 0; opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+}
+
+@layer components {
+  .card {
+    @apply relative rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm;
+  }
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.06];
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-soft;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-medium text-soft;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition hover:border-accent/50 hover:bg-accent/15;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white shadow-glow transition hover:brightness-110;
+  }
+  .h-display {
+    font-family: var(--font-serif), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+  .num { font-family: var(--font-mono), monospace; font-variant-numeric: tabular-nums; }
+  .grad-text {
+    background: linear-gradient(100deg, #fff 0%, rgb(var(--sr) var(--sg) var(--sb)) 45%, rgb(var(--ar) var(--ag) var(--ab)) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+}
+
+/* Range inputs */
+input[type="range"] {
+  accent-color: rgb(var(--ar) var(--ag) var(--ab));
+  height: 4px;
+  cursor: pointer;
+}
+
+/* Number fields */
+input[type="number"]::-webkit-inner-spin-button { opacity: 0.4; }
+
+.scroll-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Deep-link target highlight */
+.topic-card { scroll-margin-top: 9rem; }
+.topic-card:target { box-shadow: 0 0 0 1px rgb(var(--ar) var(--ag) var(--ab) / 0.6), 0 0 60px -10px rgb(var(--ar) var(--ag) var(--ab) / 0.5); }
+
+.prose-points li { position: relative; padding-left: 1.25rem; }
+.prose-points li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 99px;
+  background: rgb(var(--ar) var(--ag) var(--ab)); box-shadow: 0 0 10px rgb(var(--ar) var(--ag) var(--ab) / 0.8);
+}
+
+.print-only { display: none; }
+
+/* ---------- Print / PDF booklet ---------- */
+@page { size: A4; margin: 14mm; }
+@media print {
+  html, body { background: #fff !important; }
+  * { color: #111 !important; text-shadow: none !important; box-shadow: none !important; animation: none !important; }
+  .atmosphere, .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .card, .topic-card { background: #fff !important; border: 1px solid #bbb !important; backdrop-filter: none !important; break-inside: avoid-page; }
+  .chip { border: 1px solid #999 !important; background: #fff !important; }
+  .prose-points li::before { background: #111 !important; box-shadow: none !important; }
+  svg text { fill: #111 !important; }
+  .grad-text { background: none !important; -webkit-text-fill-color: #111 !important; }
+  .page-break { break-before: page; }
+  .avoid-break { break-inside: avoid; }
+  a { text-decoration: none; }
+  main { padding-top: 0 !important; }
+  .grid { gap: 8px !important; }
+}
